@@ -1,24 +1,20 @@
-// Express
 const express = require('express');
-// Apollo
+// import ApolloServer
 const { ApolloServer } = require('apollo-server-express');
 
-// typeDefs and resolvers
+// import our typeDefs and resolvers
 const { typeDefs, resolvers } = require('./schemas');
-
-// database connection
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
 // create a new Apollo server and pass in our schema data
 const server = new ApolloServer({
   typeDefs,
   resolvers
 });
 
-// integrate Apollo w/ express as middleware
+// integrate our Apollo server with the Express application as middleware
 server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: false }));
